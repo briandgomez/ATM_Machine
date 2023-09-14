@@ -25,7 +25,6 @@ public class Transactions {
         } else {
             System.out.println("Can't remove 0 from account");
         }
-        scanner.close();
     }
 
     public void Deposit() {
@@ -40,8 +39,6 @@ public class Transactions {
         }
         System.out.println("Amount deposited: $" + depositAmount);
         System.out.println("Current balance: $" + Balance());
-
-        scanner.close();
     }
 
     public int Balance() {
