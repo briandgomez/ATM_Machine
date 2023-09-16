@@ -1,8 +1,9 @@
 import java.util.Scanner;
+import java.sql.Connection;
 
 public class MainMenu {
 
-    public void Menu() {
+    public void Menu(Connection connection) {
         Scanner input = new Scanner(System.in);
 
         while (true) {
@@ -27,16 +28,16 @@ public class MainMenu {
                 System.out.println("Please select a valid choice");
             }
         }
-        performNewTransaction();
+        performNewTransaction(connection);
     }
 
-    public void performNewTransaction() {
+    public void performNewTransaction(Connection connection) {
         Scanner input = new Scanner(System.in);
         System.out.println("\nWould you like to perform another transaction?");
         System.out.println("Type Yes or No bewlow: ");
         String response = input.next().toLowerCase();
         if (response.equals("yes")) {
-            Menu();
+            Menu(connection);
         } else {
             input.close();
         }
