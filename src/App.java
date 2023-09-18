@@ -11,7 +11,7 @@ public class App {
             DatabaseConnector.connectoDatabase();
 
             // Create table
-            DatabaseConnector.createTable();
+            DatabaseConnector.createTables();
 
             // Insert values into exsiting table
             DatabaseOperations databaseOperations = new DatabaseOperations(connection);
