@@ -53,9 +53,16 @@ public class DatabaseOperations {
         int currentBalance = getCurrentBalance(accountName);
         int newBalance = currentBalance - withdrawAmount;
         try {
-            String sql = "UPDATE atm_machine_sample_table SET Balance WHERE Account = ?";
+            String sql = "UPDATE atm_machine_sample_table SET Balance = ? WHERE Account = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, accountName);
+            preparedStatement.setInt(1, newBalance);
+            preparedStatement.setString(2, accountName);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("\nBalance updated successfully.");
+            } else {
+                System.out.println("\nFailed to update balance.");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -69,6 +76,20 @@ public class DatabaseOperations {
 
         int currentBalance = getCurrentBalance(accountName);
         int newBalance = currentBalance + depositAmount;
+        try {
+            String sql = "UPDATE atm_machine_sample_table SET Balance = ? WHERE Account = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, newBalance);
+            preparedStatement.setString(2, accountName);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("\nBalance updated successfully.");
+            } else {
+                System.out.println("\nFailed to update balance.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return newBalance;
     }
 }
