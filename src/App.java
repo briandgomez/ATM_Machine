@@ -3,16 +3,16 @@ import java.sql.Connection;
 public class App {
     public static void main(String[] args) throws Exception {
         try {
-             // Connection to db
-            Connection connection = DatabaseConnector.getConnection();
+            // Connection to db
+            Connection connection = DatabaseConnector.getDatabaseConnection();
             System.out.println("Successfully connected to MySQL server!");
 
             // Create database
-            DatabaseConnector.createDatabase();
+            DatabaseConnector.connectoDatabase();
 
             // Create table
             DatabaseConnector.createTable();
-            
+
             // Insert values into exsiting table
             DatabaseOperations databaseOperations = new DatabaseOperations(connection);
             databaseOperations.performDatabaseOperations();
@@ -24,7 +24,7 @@ public class App {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            DatabaseConnector.closeConnection();
+            DatabaseConnector.closeDatabaseConnection();
         }
     }
 }

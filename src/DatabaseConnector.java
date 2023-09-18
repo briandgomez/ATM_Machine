@@ -32,9 +32,9 @@ public class DatabaseConnector {
         }
     }
 
-    public static void createDatabase() {
+    public static void connectoDatabase() {
         try {
-            Connection conn = getConnection();
+            Connection conn = getDatabaseConnection();
             Statement statement = conn.createStatement();
             statement.executeUpdate("DROP TABLE IF EXISTS atm_machine_sample_table");
 
@@ -45,7 +45,7 @@ public class DatabaseConnector {
         }
     }
 
-    public static Connection getConnection() {
+    public static Connection getDatabaseConnection() {
         if (connection == null) {
             try {
                 // Connect to db using credentials
@@ -57,7 +57,7 @@ public class DatabaseConnector {
         return connection;
     }
 
-    public static void closeConnection() {
+    public static void closeDatabaseConnection() {
         if (connection != null) {
             try {
                 connection.close();
