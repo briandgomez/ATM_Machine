@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class DatabaseOperations {
     private Connection connection;
@@ -42,5 +43,22 @@ public class DatabaseOperations {
         }
 
         return balance;
+    }
+
+    public int Withdraw(String accountName) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("How much would you like to withdraw?");
+        int withdrawAmount = scanner.nextInt();
+
+        int currentBalance = getCurrentBalance(accountName);
+        int newBalance = currentBalance - withdrawAmount;
+        try {
+            String sql = "UPDATE atm_machine_sample_table SET Balance WHERE Account = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, accountName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newBalance;
     }
 }

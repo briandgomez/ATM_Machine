@@ -18,7 +18,9 @@ public class MainMenu {
             Transactions newTransaction = new Transactions();
 
             if (response.equals("withdraw")) {
-                newTransaction.Withdrawal();
+                // newTransaction.Withdrawal();
+                int balance = databaseOperations.Withdraw("Checking");
+                System.out.println("Current balance: $" + balance);
                 break;
             } else if (response.equals("deposit")) {
                 newTransaction.Deposit();
@@ -37,7 +39,7 @@ public class MainMenu {
     public void performNewTransaction(Connection connection) {
         Scanner input = new Scanner(System.in);
         System.out.println("\nWould you like to perform another transaction?");
-        System.out.println("Type Yes or No bewlow: ");
+        System.out.println("Type Yes or No below: ");
         String response = input.next().toLowerCase();
         if (response.equals("yes")) {
             Menu(connection);
