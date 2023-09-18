@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DatabaseOperations {
@@ -23,5 +24,23 @@ public class DatabaseOperations {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getCurrentBalance(String accountName) {
+        int balance = 0;
+        try {
+            String sql = "SELECT Balance FROM atm_machine_sample_table WHERE Account = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, accountName);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                balance = resultSet.getInt("Balance");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return balance;
     }
 }

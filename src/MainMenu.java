@@ -5,13 +5,15 @@ public class MainMenu {
 
     public void Menu(Connection connection) {
         Scanner input = new Scanner(System.in);
+        DatabaseOperations databaseOperations = new DatabaseOperations(connection);
 
         while (true) {
             System.out.println("What would you like to do?\n");
             System.out.println(
                     "Please type 1 of the following: \n" +
                             "Deposit\n" +
-                            "Withdraw\n");
+                            "Withdraw\n" +
+                            "Balance\n");
             String response = input.next().toLowerCase();
             Transactions newTransaction = new Transactions();
 
@@ -22,7 +24,8 @@ public class MainMenu {
                 newTransaction.Deposit();
                 break;
             } else if (response.equals("balance")) {
-                newTransaction.Balance();
+                int balance = databaseOperations.getCurrentBalance("Checking");
+                System.out.println("Current balance: $" + balance);
                 break;
             } else {
                 System.out.println("Please select a valid choice");
