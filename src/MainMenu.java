@@ -23,7 +23,9 @@ public class MainMenu {
                 System.out.println("Current balance: $" + balance);
                 break;
             } else if (response.equals("deposit")) {
-                newTransaction.Deposit();
+                // newTransaction.Deposit();
+                int balance = databaseOperations.Deposit("Checking");
+                System.out.println("Current balance: $" + balance);
                 break;
             } else if (response.equals("balance")) {
                 int balance = databaseOperations.getCurrentBalance("Checking");

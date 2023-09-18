@@ -61,4 +61,14 @@ public class DatabaseOperations {
         }
         return newBalance;
     }
+
+    public int Deposit(String accountName) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("How much would you like to deposit?");
+        int depositAmount = scanner.nextInt();
+
+        int currentBalance = getCurrentBalance(accountName);
+        int newBalance = currentBalance + depositAmount;
+        return newBalance;
+    }
 }
