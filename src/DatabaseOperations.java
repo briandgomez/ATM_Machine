@@ -12,11 +12,11 @@ public class DatabaseOperations {
 
     public void performDatabaseOperations() {
         try {
-            String sql = "INSERT INTO atm_machine_sample_table (first, last, age) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO atm_machine_sample_table (Account, Balance, Date) VALUES (?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, "Judy");
-            preparedStatement.setString(2, "McLean");
-            preparedStatement.setString(3, "35");
+            preparedStatement.setString(1, "Checking");
+            preparedStatement.setString(2, "9500");
+            preparedStatement.setDate(3, java.sql.Date.valueOf(java.time.LocalDate.now()));
 
             int rowsAffected = preparedStatement.executeUpdate();
             System.out.println(rowsAffected + " row(s) changed");

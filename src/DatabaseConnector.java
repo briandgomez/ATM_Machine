@@ -20,9 +20,9 @@ public class DatabaseConnector {
 
             String sql = "CREATE TABLE atm_machine_sample_table " +
                     "(id INTEGER NOT NULL AUTO_INCREMENT, "
-                    + "first VARCHAR(255), "
-                    + "last VARCHAR(255), "
-                    + "age INTEGER, "
+                    + "Account VARCHAR(255), "
+                    + "Balance INTEGER, "
+                    + "Date DATE, "
                     + "PRIMARY KEY (id))";
 
             statement.executeUpdate(sql);
