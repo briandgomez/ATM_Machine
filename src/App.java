@@ -19,7 +19,8 @@ public class App {
 
             // Perform transactions
             MainMenu options = new MainMenu();
-            options.Menu(connection);
+            long cardNum = options.Login();
+            options.Menu(connection, cardNum);
 
         } catch (Exception e) {
             e.printStackTrace();
