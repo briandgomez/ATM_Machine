@@ -28,10 +28,11 @@ public class DatabaseConnector {
             String sql = null;
             for (String currentTableName : tableNames) {
                 sql = "CREATE TABLE " + currentTableName + " " +
-                        "(id INTEGER NOT NULL AUTO_INCREMENT, "
-                        + "Account VARCHAR(255), "
-                        + "Balance INTEGER, "
-                        + "Date DATE, "
+                        "(id INTEGER NOT NULL UNIQUE AUTO_INCREMENT, "
+                        + "primary_account_number LONGTEXT, "
+                        + "pin INTEGER, "
+                        + "balance INTEGER, "
+                        + "date DATE, "
                         + "PRIMARY KEY (id))";
                 statement.executeUpdate(sql);
                 System.out.println(currentTableName + " created");
