@@ -5,7 +5,7 @@ public class Transactions {
 
     public void Withdrawal() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("How much would you like to wihtdraw?");
+        System.out.println("How much would you like to withdraw?");
 
         int withdrawAmount = scanner.nextInt();
 
