@@ -14,11 +14,12 @@ public class DatabaseOperations {
 
     public void performDatabaseOperations() {
         try {
-            String sql = "INSERT INTO atm_machine_sample_table (Account, Balance, Date) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO atm_machine_sample_table (primary_account_number, pin, balance, date) VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, "Checking");
-            preparedStatement.setString(2, "9500");
-            preparedStatement.setDate(3, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            preparedStatement.setLong(1, 1234567891L);
+            preparedStatement.setLong(2, 4559);
+            preparedStatement.setString(3, "9500");
+            preparedStatement.setDate(4, java.sql.Date.valueOf(java.time.LocalDate.now()));
 
             int rowsAffected = preparedStatement.executeUpdate();
             System.out.println(rowsAffected + " row(s) changed");
@@ -27,16 +28,16 @@ public class DatabaseOperations {
         }
     }
 
-    public int getCurrentBalance(String accountName) {
-        int balance = 0;
+    public long getCurrentBalance(long cardNum) {
+        long balance = 0;
         try {
-            String sql = "SELECT Balance FROM atm_machine_sample_table WHERE Account = ?";
+            String sql = "SELECT balance FROM atm_machine_sample_table WHERE primary_account_number = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, accountName);
+            preparedStatement.setLong(1, cardNum);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                balance = resultSet.getInt("Balance");
+                balance = resultSet.getLong("balance");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -45,18 +46,18 @@ public class DatabaseOperations {
         return balance;
     }
 
-    public int Withdraw(String accountName) {
+    public long Withdraw(long cardNum) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("How much would you like to withdraw?");
-        int withdrawAmount = scanner.nextInt();
+        long withdrawAmount = scanner.nextInt();
 
-        int currentBalance = getCurrentBalance(accountName);
-        int newBalance = currentBalance - withdrawAmount;
+        long currentBalance = getCurrentBalance(cardNum);
+        long newBalance = currentBalance - withdrawAmount;
         try {
-            String sql = "UPDATE atm_machine_sample_table SET Balance = ? WHERE Account = ?";
+            String sql = "UPDATE atm_machine_sample_table SET balance = ? WHERE primary_account_number = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, newBalance);
-            preparedStatement.setString(2, accountName);
+            preparedStatement.setLong(1, newBalance);
+            preparedStatement.setLong(2, cardNum);
             int rowsUpdated = preparedStatement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("\nBalance updated successfully.");
@@ -69,18 +70,18 @@ public class DatabaseOperations {
         return newBalance;
     }
 
-    public int Deposit(String accountName) {
+    public long Deposit(long cardNum) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("How much would you like to deposit?");
-        int depositAmount = scanner.nextInt();
+        long depositAmount = scanner.nextInt();
 
-        int currentBalance = getCurrentBalance(accountName);
-        int newBalance = currentBalance + depositAmount;
+        long currentBalance = getCurrentBalance(cardNum);
+        long newBalance = currentBalance + depositAmount;
         try {
-            String sql = "UPDATE atm_machine_sample_table SET Balance = ? WHERE Account = ?";
+            String sql = "UPDATE atm_machine_sample_table SET balance = ? WHERE primary_account_number = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, newBalance);
-            preparedStatement.setString(2, accountName);
+            preparedStatement.setLong(1, newBalance);
+            preparedStatement.setLong(2, cardNum);
             int rowsUpdated = preparedStatement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("\nBalance updated successfully.");
