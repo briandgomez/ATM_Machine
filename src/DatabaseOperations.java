@@ -23,6 +23,16 @@ public class DatabaseOperations {
 
             int rowsAffected = preparedStatement.executeUpdate();
             System.out.println(rowsAffected + " row(s) changed");
+
+            String sql2 = "INSERT INTO atm_machine_sample_table_2 (primary_account_number, pin, balance, date) VALUES (?, ?, ?, ?)";
+            PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
+            preparedStatement2.setLong(1, 379837492L);
+            preparedStatement2.setLong(2, 1234);
+            preparedStatement2.setString(3, "10000000");
+            preparedStatement2.setDate(4, java.sql.Date.valueOf(java.time.LocalDate.now()));
+
+            int rowsAffected2 = preparedStatement2.executeUpdate();
+            System.out.println(rowsAffected2 + " row(s) changed");
         } catch (SQLException e) {
             e.printStackTrace();
         }
