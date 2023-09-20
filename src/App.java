@@ -19,7 +19,7 @@ public class App {
 
             // Perform transactions
             MainMenu options = new MainMenu();
-            long cardNum = options.Login();
+            long cardNum = options.Login(connection);
             options.Menu(connection, cardNum);
 
         } catch (Exception e) {
