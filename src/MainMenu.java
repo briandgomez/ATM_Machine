@@ -6,14 +6,14 @@ public class MainMenu {
     public long Login(Connection connection) {
         Scanner primAccntNum = new Scanner(System.in);
         Scanner pin = new Scanner(System.in);
-        Account account = new Account();
+        DatabaseHelper util = new DatabaseHelper();
 
         System.out.println("\nPlease provide your primary account number and PIN:");
         System.out.println("Primary account number: ");
         long cardNum = primAccntNum.nextInt();
         System.out.println("PIN: ");
         int pinNum = pin.nextInt();
-        account.authenticateUser(cardNum, pinNum, connection);
+        util.authenticateUser(cardNum, pinNum, connection);
         return cardNum;
     }
 
