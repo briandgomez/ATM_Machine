@@ -1,5 +1,17 @@
+# Personal Notes
 **/Code Notes*
-lib/mysql-connector-j-8.1.0.jar
+
+# Generated build files and directories
+build/
+
+# Gradle specific artifacts
 /gradle-8.3/
 .gradle
+
+# Tar and jar files created by the build
+*.jar
+*.tar
+
+# Bin and class files created by the build
 bin/
+*.class
