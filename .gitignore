@@ -1,2 +1,5 @@
 **/Code Notes*
 lib/mysql-connector-j-8.1.0.jar
+/gradle-8.3/
+.gradle
+bin/
