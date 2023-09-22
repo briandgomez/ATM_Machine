@@ -19,6 +19,7 @@ public class DatabaseHelper {
                     count = resultSet.getInt(1);
                     if (count == 1) {
                         System.out.println("Val exists in table: " + tableName);
+                        break;
                     }
                 }
             }
