@@ -9,3 +9,5 @@ This application can be run by downloading the zip file and opening in VSCode
 
 ## Tools
 * Java
+* JUnit
+* Gradle
