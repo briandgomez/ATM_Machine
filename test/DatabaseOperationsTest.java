@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -80,5 +81,31 @@ public class DatabaseOperationsTest {
         verify(mockResultSet).getLong("balance");
 
         assertEquals(expectedBalance, actualBalance);
+    }
+
+    @Test
+    public void checkWithdrawUpdatesBalanceCorrectly() throws SQLException {
+        long validCardNumber = 1234567891L;
+        long initialBalance = 9500;
+        long withdrawAmount = 2445;
+        long newBalance = initialBalance - withdrawAmount;
+
+        // New preparedstatement created
+        PreparedStatement mockPreparedStatement = mock(PreparedStatement.class);
+
+        ResultSet mockResultSet = mock(ResultSet.class);
+        when(mockResultSet.next()).thenReturn(true);
+        when(mockResultSet.getLong("balance")).thenReturn(initialBalance);
+        when(mockPreparedStatement.executeQuery()).thenReturn(mockResultSet);
+        when(mockConnection.prepareStatement(anyString())).thenReturn(mockPreparedStatement);
+
+        long result = dbOperations.Withdraw(validCardNumber, withdrawAmount);
+
+        String expectedSql = "UPDATE atm_machine_sample_table SET balance = ? WHERE primary_account_number = ?";
+        verify(mockConnection).prepareStatement(expectedSql);
+        verify(mockPreparedStatement).setLong(1, newBalance);
+        verify(mockPreparedStatement).setLong(2, validCardNumber);
+
+        assertEquals(newBalance, result);
     }
 }
