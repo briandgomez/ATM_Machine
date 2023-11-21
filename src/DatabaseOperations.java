@@ -56,11 +56,7 @@ public class DatabaseOperations {
         return balance;
     }
 
-    public long Withdraw(long cardNum) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("How much would you like to withdraw?");
-        long withdrawAmount = scanner.nextInt();
-
+    public long Withdraw(long cardNum, long withdrawAmount) {
         long currentBalance = getCurrentBalance(cardNum);
         long newBalance = currentBalance - withdrawAmount;
         try {

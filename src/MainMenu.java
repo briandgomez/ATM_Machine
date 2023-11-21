@@ -32,8 +32,7 @@ public class MainMenu {
             Transactions newTransaction = new Transactions();
 
             if (response.equals("withdraw")) {
-                // newTransaction.Withdrawal();
-                long balance = databaseOperations.Withdraw(cardNum);
+                long balance = databaseOperations.Withdraw(cardNum, 0);
                 System.out.println("Current balance: $" + balance);
                 break;
             } else if (response.equals("deposit")) {
