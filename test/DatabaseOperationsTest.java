@@ -99,7 +99,7 @@ public class DatabaseOperationsTest {
         when(mockPreparedStatement.executeQuery()).thenReturn(mockResultSet);
         when(mockConnection.prepareStatement(anyString())).thenReturn(mockPreparedStatement);
 
-        long result = dbOperations.Withdraw(validCardNumber, withdrawAmount);
+        long result = dbOperations.Withdraw(validCardNumber, withdrawAmount, true);
 
         String expectedSql = "UPDATE atm_machine_sample_table SET balance = ? WHERE primary_account_number = ?";
         verify(mockConnection).prepareStatement(expectedSql);

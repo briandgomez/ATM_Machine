@@ -56,7 +56,16 @@ public class DatabaseOperations {
         return balance;
     }
 
-    public long Withdraw(long cardNum, long withdrawAmount) {
+    public long Withdraw(long cardNum, long withdraw, boolean isTest) {
+        long withdrawAmount = 0;
+        if (isTest == true) {
+            withdrawAmount = withdraw;
+        } else {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("How much would you like to withdraw?");
+            withdrawAmount = scanner.nextInt();
+        }
+
         long currentBalance = getCurrentBalance(cardNum);
         long newBalance = currentBalance - withdrawAmount;
         try {
