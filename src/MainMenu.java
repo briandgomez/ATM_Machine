@@ -38,8 +38,9 @@ public class MainMenu {
                 System.out.println("Current balance: $" + balance);
                 break;
             } else if (response.equals("deposit")) {
-                // newTransaction.Deposit();
-                long balance = databaseOperations.Deposit(cardNum);
+                long defaultAmount = 0;
+                boolean deafaultTestVal = false;
+                long balance = databaseOperations.Deposit(cardNum, defaultAmount, deafaultTestVal);
                 System.out.println("Current balance: $" + balance);
                 break;
             } else if (response.equals("balance")) {

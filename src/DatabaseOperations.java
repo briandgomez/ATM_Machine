@@ -85,10 +85,15 @@ public class DatabaseOperations {
         return newBalance;
     }
 
-    public long Deposit(long cardNum) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("How much would you like to deposit?");
-        long depositAmount = scanner.nextInt();
+    public long Deposit(long cardNum, long deposit, boolean isTest) {
+        long depositAmount = 0;
+        if (isTest == true) {
+            depositAmount = deposit;
+        } else {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("How much would you like to deposit?");
+            depositAmount = scanner.nextInt();
+        }
 
         long currentBalance = getCurrentBalance(cardNum);
         long newBalance = currentBalance + depositAmount;

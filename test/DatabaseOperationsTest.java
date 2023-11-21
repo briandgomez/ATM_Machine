@@ -108,4 +108,29 @@ public class DatabaseOperationsTest {
 
         assertEquals(newBalance, result);
     }
+
+        @Test
+    public void checkDepositUpdatesBalanceCorrectly() throws SQLException {
+        long validCardNumber = 1234567891L;
+        long initialBalance = 9500;
+        long depositAmount = 2000;
+        long newBalance = initialBalance + depositAmount;
+
+        PreparedStatement mockPreparedStatement = mock(PreparedStatement.class);
+
+        ResultSet mockResultSet = mock(ResultSet.class);
+        when(mockResultSet.next()).thenReturn(true);
+        when(mockResultSet.getLong("balance")).thenReturn(initialBalance);
+        when(mockPreparedStatement.executeQuery()).thenReturn(mockResultSet);
+        when(mockConnection.prepareStatement(anyString())).thenReturn(mockPreparedStatement);
+
+        long result = dbOperations.Deposit(validCardNumber, depositAmount, true);
+
+        String expectedSql = "UPDATE atm_machine_sample_table SET balance = ? WHERE primary_account_number = ?";
+        verify(mockConnection).prepareStatement(expectedSql);
+        verify(mockPreparedStatement).setLong(1, newBalance);
+        verify(mockPreparedStatement).setLong(2, validCardNumber);
+
+        assertEquals(newBalance, result);
+    }
 }
