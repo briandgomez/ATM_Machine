@@ -15,3 +15,6 @@ build/
 # Bin and class files created by the build
 bin/
 *.class
+
+# Configuration files
+*.properties
