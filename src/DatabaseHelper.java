@@ -6,6 +6,11 @@ import java.sql.ResultSet;
 
 public class DatabaseHelper {
     public void authenticateUser(long cardNum, int pinNum, Connection connection) {
+        long debitCardNum = getCardNum(cardNum, connection);
+    }
+
+    // check card number exists in database, getCardNum()
+    public long getCardNum(long cardNum, Connection connection) {
         int count = 0;
         ArrayList<String> tableNamesAsStr = getTableNames(connection);
         try {
@@ -32,6 +37,7 @@ public class DatabaseHelper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return cardNum;
     }
 
     public ArrayList<String> getTableNames(Connection connection) {
