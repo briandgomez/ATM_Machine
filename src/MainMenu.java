@@ -29,7 +29,6 @@ public class MainMenu {
                             "Withdraw\n" +
                             "Balance\n");
             String response = input.next().toLowerCase();
-            Transactions newTransaction = new Transactions();
 
             if (response.equals("withdraw")) {
                 long defaultAmount = 0;
