@@ -15,7 +15,7 @@ public class App {
 
             // Insert values into exsiting table
             DatabaseOperations databaseOperations = new DatabaseOperations(connection);
-            databaseOperations.performDatabaseOperations();
+            databaseOperations.initializeSampleData();
 
             // Perform transactions
             MainMenu options = new MainMenu();

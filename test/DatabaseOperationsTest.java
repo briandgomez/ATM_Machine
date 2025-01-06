@@ -45,7 +45,7 @@ public class DatabaseOperationsTest {
 
     @Test
     public void checkDataHasBeenAddedDatabase() throws SQLException {
-        dbOperations.performDatabaseOperations();
+        dbOperations.initializeSampleData();
         // check data insertion into db was successful
         verify(mockConnection).prepareStatement(
                 "INSERT INTO atm_machine_sample_table (primary_account_number, pin, balance, date) VALUES (?, ?, ?, ?)");
@@ -99,7 +99,7 @@ public class DatabaseOperationsTest {
         when(mockPreparedStatement.executeQuery()).thenReturn(mockResultSet);
         when(mockConnection.prepareStatement(anyString())).thenReturn(mockPreparedStatement);
 
-        long result = dbOperations.Withdraw(validCardNumber, withdrawAmount, true);
+        long result = dbOperations.performWithdraw(validCardNumber, withdrawAmount, true);
 
         String expectedSql = "UPDATE atm_machine_sample_table SET balance = ? WHERE primary_account_number = ?";
         verify(mockConnection).prepareStatement(expectedSql);
@@ -124,7 +124,7 @@ public class DatabaseOperationsTest {
         when(mockPreparedStatement.executeQuery()).thenReturn(mockResultSet);
         when(mockConnection.prepareStatement(anyString())).thenReturn(mockPreparedStatement);
 
-        long result = dbOperations.Deposit(validCardNumber, depositAmount, true);
+        long result = dbOperations.performDeposit(validCardNumber, depositAmount, true);
 
         String expectedSql = "UPDATE atm_machine_sample_table SET balance = ? WHERE primary_account_number = ?";
         verify(mockConnection).prepareStatement(expectedSql);

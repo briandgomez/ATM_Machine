@@ -12,7 +12,7 @@ public class DatabaseOperations {
         this.connection = connection;
     }
 
-    public void performDatabaseOperations() {
+    public void initializeSampleData() {
         try {
             String sql = "INSERT INTO atm_machine_sample_table (primary_account_number, pin, balance, date) VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -56,7 +56,7 @@ public class DatabaseOperations {
         return balance;
     }
 
-    public long Withdraw(long cardNum, long withdraw, boolean isTest) {
+    public long performWithdraw(long cardNum, long withdraw, boolean isTest) {
         long withdrawAmount = 0;
         if (isTest == true) {
             withdrawAmount = withdraw;
@@ -85,7 +85,7 @@ public class DatabaseOperations {
         return newBalance;
     }
 
-    public long Deposit(long cardNum, long deposit, boolean isTest) {
+    public long performDeposit(long cardNum, long deposit, boolean isTest) {
         long depositAmount = 0;
         if (isTest == true) {
             depositAmount = deposit;

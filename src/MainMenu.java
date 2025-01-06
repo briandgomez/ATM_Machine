@@ -33,13 +33,13 @@ public class MainMenu {
             if (response.equals("withdraw")) {
                 long defaultAmount = 0;
                 boolean deafaultTestVal = false;
-                long balance = databaseOperations.Withdraw(cardNum, defaultAmount, deafaultTestVal);
+                long balance = databaseOperations.performWithdraw(cardNum, defaultAmount, deafaultTestVal);
                 System.out.println("Current balance: $" + balance);
                 break;
             } else if (response.equals("deposit")) {
                 long defaultAmount = 0;
                 boolean deafaultTestVal = false;
-                long balance = databaseOperations.Deposit(cardNum, defaultAmount, deafaultTestVal);
+                long balance = databaseOperations.performDeposit(cardNum, defaultAmount, deafaultTestVal);
                 System.out.println("Current balance: $" + balance);
                 break;
             } else if (response.equals("balance")) {
