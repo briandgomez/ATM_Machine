@@ -44,7 +44,7 @@ public class DatabaseOperationsTest {
     }
 
     @Test
-    public void checkDataHasBeenAddedDatabase() throws SQLException {
+    public void verifySampleDataInsertion() throws SQLException {
         dbOperations.initializeSampleData();
         // check data insertion into db was successful
         verify(mockConnection).prepareStatement(
@@ -59,7 +59,7 @@ public class DatabaseOperationsTest {
     }
 
     @Test
-    public void testGetCurrentBalanceForValidCardNumber() throws SQLException {
+    public void verifyCurrentBalanceForValidCardNumber() throws SQLException {
         long validCardNumber = 1234567891;
         long expectedBalance = 9500L;
 
@@ -84,7 +84,7 @@ public class DatabaseOperationsTest {
     }
 
     @Test
-    public void checkWithdrawUpdatesBalanceCorrectly() throws SQLException {
+    public void verifyWithdrawUpdatesBalance() throws SQLException {
         long validCardNumber = 1234567891L;
         long initialBalance = 9500;
         long withdrawAmount = 2445;
@@ -109,8 +109,8 @@ public class DatabaseOperationsTest {
         assertEquals(newBalance, result);
     }
 
-        @Test
-    public void checkDepositUpdatesBalanceCorrectly() throws SQLException {
+    @Test
+    public void verifyDepositUpdatesBalance() throws SQLException {
         long validCardNumber = 1234567891L;
         long initialBalance = 9500;
         long depositAmount = 2000;
